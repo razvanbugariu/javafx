@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<VBox alignment="center" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.halzfaller.ßapp.login.LoginController">
+    <Region prefHeight="20.0" prefWidth="Infinity" />
+    <ImageView fitHeight="102.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true">
+    </ImageView>
+    <Region prefHeight="10.0" prefWidth="Infinity" />
+    <HBox alignment="CENTER">
+        <Label text="Username" />
+        <TextField fx:id="username" promptText="Username..." />
+    </HBox>
+    <Region prefHeight="10.0" prefWidth="Infinity" />
+    <HBox alignment="CENTER">
+        <Label text="Password" />
+        <PasswordField fx:id="password" promptText="Password" />
+    </HBox>
+    <Region prefHeight="20.0" prefWidth="Infinity" />
+    <Button fx:id="loginButton" mnemonicParsing="false" text="Button" />
+    <Region prefHeight="10.0" prefWidth="Infinity" />
+    <CheckBox fx:id="bindingCheckBox" text="Bind password to username?" />
+    <Label fx:id="errorsLabel" textFill="#e10b0b" />
+    <Button fx:id="changeSceneButton" text="Change Scene" />
+</VBox>
