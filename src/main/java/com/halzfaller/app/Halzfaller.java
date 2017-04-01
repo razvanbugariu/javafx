@@ -30,6 +30,8 @@ public class Halzfaller extends Application {
         personRepo.save(person);
         List<Person> people = personRepo.findAll();
         System.out.println(people);
+        personRepo.delete(person.getId());
+        System.out.println(personRepo.findAll().size());
     }
 
     @Override
