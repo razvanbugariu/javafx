@@ -4,7 +4,7 @@ package com.halzfaller.app;
  * Created by rbu on 3/31/17.
  */
 
-import com.halzfaller.app.database.PersonRepo;
+import com.halzfaller.app.repository.PersonRepo;
 import com.halzfaller.app.entities.Person;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

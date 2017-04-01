@@ -1,51 +1,32 @@
-package com.halzfaller.app.database;
+package com.halzfaller.app.common;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
-class DatabaseWrapper {
+public class DatabaseWrapper {
 
     private static final String PERSISTENCE_UNIT = "test-db";
 
-    protected EntityManager em;
-    protected EntityManagerFactory emFactory;
+    private EntityManager em;
+    private EntityManagerFactory emFactory;
 
-    <T> List<T> getAll(String query, Class<T> clasz) {
+    public <R> R executeWithReturn(Function<EntityManager, R> action) {
         beginConnection();
-
-        List<T> result = em.createQuery(query, clasz).getResultList();
-
+        R result = action.apply(em);
         closeConnection();
         return result;
     }
 
-    void create(Object entity) {
+    public void executeWithoutReturn(Consumer<EntityManager> action) {
         beginConnection();
-
-        em.persist(entity);
-
+        action.accept(em);
         closeConnection();
     }
 
-    <T> T merge(T entity) {
-        beginConnection();
-        T newEntity = em.merge(entity);
-        closeConnection();
-
-        return newEntity;
-    }
-
-    void remove(Object entity) {
-        beginConnection();
-
-        em.remove(entity);
-
-        closeConnection();
-    }
-
-    void beginConnection() {
+    private void beginConnection() {
         em = getEntityManager();
 
         if (!em.getTransaction().isActive()) {
@@ -53,7 +34,7 @@ class DatabaseWrapper {
         }
     }
 
-    void closeConnection() {
+    private void closeConnection() {
         if (em != null) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().commit();
