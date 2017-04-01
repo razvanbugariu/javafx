@@ -10,10 +10,17 @@ import com.sun.jersey.api.representation.Form;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
+import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 
 /**
  * Created by rbu on 4/1/17.
@@ -33,21 +40,31 @@ public class LoginController {
     private Label errorsLabel;
 
     public void initialize(){
-        loginButton.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                login();
-            }
-        });
+        loginButton.setOnAction(event -> login());
     }
 
     private void login(){
         Client client = Client.create();
-        WebResource resource = client.resource("https://mentors4me-api.herokuapp.com/api/sessions");
         Gson gson = new Gson();
         String toJson = gson.toJson(new User(usernameTextField.getText(), passwordTextField.getText()));
         System.out.println(toJson);
-        ClientResponse response = resource.post(ClientResponse.class, toJson);
+        ClientResponse response = client.resource("https://mentors4me-api.herokuapp.com/api/sessions").accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON).post(ClientResponse.class, toJson);
         System.out.println(response);
+        changeScene();
+    }
+
+    private void changeScene(){
+        Stage stage = new Stage();
+        stage.setTitle("Second Scene");
+        Pane myPane = null;
+        try {
+            myPane = FXMLLoader.load(getClass().getClassLoader().getResource("secondScene.fxml"));
+        } catch (IOException e) {
+            System.out.println("FXML file for second screen not found!");
+        }
+        Scene scene = new Scene(myPane);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }
