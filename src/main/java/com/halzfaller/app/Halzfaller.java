@@ -4,7 +4,7 @@ package com.halzfaller.app;
  * Created by rbu on 3/31/17.
  */
 
-import com.halzfaller.app.database.DatabaseWrapper;
+import com.halzfaller.app.database.PersonRepo;
 import com.halzfaller.app.entities.Person;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -25,10 +25,10 @@ public class Halzfaller extends Application {
     }
 
     private static void testDb() {
-        DatabaseWrapper wrapper = new DatabaseWrapper();
+        PersonRepo personRepo = new PersonRepo();
         Person person = new Person("Josh Long");
-        wrapper.save(person);
-        List<Person> people = wrapper.findAll("Select p from Person p", Person.class);
+        personRepo.save(person);
+        List<Person> people = personRepo.findAll();
         System.out.println(people);
     }
 

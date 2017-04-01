@@ -5,39 +5,47 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public class DatabaseWrapper {
+class DatabaseWrapper {
 
     private static final String PERSISTENCE_UNIT = "test-db";
 
-    private EntityManager em;
-    private EntityManagerFactory emFactory;
+    protected EntityManager em;
+    protected EntityManagerFactory emFactory;
 
-    public <T> List<T> findAll(String query, Class<T> clasz) {
+    <T> List<T> getAll(String query, Class<T> clasz) {
         beginConnection();
 
         List<T> result = em.createQuery(query, clasz).getResultList();
 
-        closeConn();
+        closeConnection();
         return result;
     }
 
-    public void save(Object entity) {
+    void create(Object entity) {
         beginConnection();
 
         em.persist(entity);
 
-        closeConn();
+        closeConnection();
     }
 
-    public <T> T update(T entity) {
+    <T> T merge(T entity) {
         beginConnection();
         T newEntity = em.merge(entity);
-        closeConn();
+        closeConnection();
 
         return newEntity;
     }
 
-    private void beginConnection() {
+    void remove(Object entity) {
+        beginConnection();
+
+        em.remove(entity);
+
+        closeConnection();
+    }
+
+    void beginConnection() {
         em = getEntityManager();
 
         if (!em.getTransaction().isActive()) {
@@ -45,7 +53,7 @@ public class DatabaseWrapper {
         }
     }
 
-    private void closeConn() {
+    void closeConnection() {
         if (em != null) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().commit();
