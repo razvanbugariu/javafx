@@ -27,17 +27,13 @@ public class SecondSceneController {
     }
 
     private void backToLogin() {
-        Stage stage = new Stage();
-        stage.setTitle("Login Scene");
         Pane myPane = null;
         try {
             myPane = FXMLLoader.load(getClass().getClassLoader().getResource("login.fxml"));
         } catch (IOException e) {
             System.out.println("FXML file for second screen not found!");
         }
-        Scene scene = new Scene(myPane);
-        stage.setScene(scene);
-        stage.show();
+        Halzfaller.changeScene("Login", new Scene(myPane, 300, 250));
     }
 
 }
