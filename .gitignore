@@ -3,3 +3,4 @@
 target
 *.iml
 holzfaller.iml
+src/main/resources/database
