@@ -13,13 +13,17 @@ public class Person {
     private long id;
 
     @Column
-    private String name;
+    private String firstName;
+
+    @Column
+    private String lastName;
 
     public Person() {
     }
 
-    public Person(String name) {
-        this.name = name;
+    public Person(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public long getId() {
@@ -30,12 +34,12 @@ public class Person {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     @Override
@@ -57,8 +61,15 @@ public class Person {
     public String toString() {
         return "Person{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + firstName + '\'' +
                 '}';
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.halzfaller.app.PersonSceneController">
+    <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.0" minWidth="10.0" prefWidth="132.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.0" minWidth="10.0" prefWidth="327.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="136.0" minWidth="10.0" prefWidth="128.0" />
+      <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="342.0" minHeight="10.0" prefHeight="328.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="168.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+
+    <TableView prefHeight="328.0" prefWidth="423.0" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="0"
+               fx:id="peopleTable">
+        <columns>
+            <TableColumn prefWidth="319.0" text="First name" fx:id="firstName"/>
+            <TableColumn prefWidth="276.0" text="Last name" fx:id="lastName"/>
+        </columns>
+    </TableView>
+
+    <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="1" alignment="CENTER">
+        <Label alignment="CENTER" text="First name" />
+        <Label alignment="CENTER" text="Last name" />
+    </VBox>
+
+    <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="1" alignment="CENTER">
+         <TextField fx:id="firstNameInput"/>
+         <TextField fx:id="lastNameInput"/>
+    </VBox>
+
+    <VBox spacing="5" GridPane.columnIndex="2" GridPane.rowIndex="1" alignment="CENTER">
+        <Button onAction="#addPerson" text="Add" alignment="BASELINE_CENTER"/>
+        <Button fx:id="backToLoginSceneButton" text="Back" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+    </VBox>
+</GridPane>

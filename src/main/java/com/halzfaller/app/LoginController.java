@@ -1,14 +1,9 @@
 package com.halzfaller.app;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.halzfaller.app.entities.User;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.representation.Form;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
@@ -54,13 +48,12 @@ public class LoginController {
     }
 
     private void changeScene(){
-        Pane myPane = null;
         try {
-            myPane = FXMLLoader.load(getClass().getClassLoader().getResource("secondScene.fxml"));
+            Pane myPane = FXMLLoader.load(getClass().getClassLoader().getResource("ui/personScene.fxml"));
+            Halzfaller.changeScene("Title", new Scene(myPane, 600, 400));
         } catch (IOException e) {
             System.out.println("FXML file for second screen not found!");
         }
-        Halzfaller.changeScene("Title", new Scene(myPane, 200, 300));
     }
 
 }
